@@ -45,13 +45,18 @@ func (p *CxoneProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp
 	resp.Schema = schema.Schema{
 		MarkdownDescription: "The CXone provider enables management of NiCE CXone and Cognigy.AI resources using Terraform.",
 		Attributes: map[string]schema.Attribute{
-			"api_key": schema.StringAttribute{
-				MarkdownDescription: "API key for NiCE CXone authentication. Can also be set via the `CXONE_API_KEY` environment variable.",
+			"access_key_id": schema.StringAttribute{
+				MarkdownDescription: "Access Key ID for NiCE CXone OAuth2 authentication. Can also be set via the `CXONE_ACCESS_KEY_ID` environment variable.",
+				Optional:            true,
+				Sensitive:           true,
+			},
+			"access_key_secret": schema.StringAttribute{
+				MarkdownDescription: "Access Key Secret for NiCE CXone OAuth2 authentication. Can also be set via the `CXONE_ACCESS_KEY_SECRET` environment variable.",
 				Optional:            true,
 				Sensitive:           true,
 			},
 			"region": schema.StringAttribute{
-				MarkdownDescription: "NiCE CXone cluster region (e.g. `us-east-1`). Can also be set via the `CXONE_REGION` environment variable.",
+				MarkdownDescription: "NiCE CXone region for the authentication endpoint (e.g. `us-east-1`). Can also be set via the `CXONE_REGION` environment variable.",
 				Optional:            true,
 			},
 			"cognigy_api_key": schema.StringAttribute{
