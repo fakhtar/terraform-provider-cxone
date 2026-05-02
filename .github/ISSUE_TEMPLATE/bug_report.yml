@@ -1,0 +1,94 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behaviour in the CXone provider.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search existing issues before opening a new one.
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug and what you expected to happen.
+      placeholder: |
+        What happened?
+        What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Terraform Configuration
+      description: >
+        Paste the relevant Terraform configuration. Remove any sensitive
+        values such as API keys before posting.
+      render: hcl
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behaviour.
+      placeholder: |
+        1. Configure resource `cxone_acd_skill` with ...
+        2. Run `terraform apply`
+        3. See error ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Terraform Output
+      description: >
+        Paste the full output of `terraform apply` or `terraform plan`.
+        For debug output run with `TF_LOG=DEBUG terraform apply` and
+        share a link to a GitHub Gist rather than pasting inline.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: provider_version
+    attributes:
+      label: Provider Version
+      description: Output of `terraform version`
+      placeholder: "fakhtar/cxone v0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: terraform_version
+    attributes:
+      label: Terraform Version
+      placeholder: "1.15.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context, links to related issues, or screenshots.
+    validations:
+      required: false

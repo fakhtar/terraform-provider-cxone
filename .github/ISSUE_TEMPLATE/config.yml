@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community Discussion
+    url: https://github.com/fakhtar/terraform-provider-cxone/discussions
+    about: For general questions and usage help, please use GitHub Discussions.
+  - name: NiCE CXone Developer Portal
+    url: https://developer.niceincontact.com
+    about: Official NiCE CXone API documentation.
+  - name: Cognigy.AI Documentation
+    url: https://docs.cognigy.com
+    about: Official Cognigy.AI documentation.

@@ -1,0 +1,67 @@
+name: 🚀 Feature Request
+description: Request a new resource, data source, or provider feature.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search existing issues before opening a new one.
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Request Type
+      description: What kind of feature are you requesting?
+      options:
+        - New Resource (e.g. cxone_acd_skill)
+        - New Data Source (e.g. data.cxone_business_unit)
+        - New attribute on existing resource
+        - Provider-level feature
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: >
+        A clear description of the feature you are requesting and
+        the problem it solves.
+    validations:
+      required: true
+
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Use Case
+      description: >
+        Describe the real-world scenario this would enable. What
+        NiCE CXone or Cognigy.AI workflow would this support?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_config
+    attributes:
+      label: Proposed Terraform Configuration
+      description: >
+        If applicable, show what the HCL configuration for this
+        feature would look like.
+      render: hcl
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: >
+        Links to NiCE CXone or Cognigy.AI API documentation
+        relevant to this feature request.
+    validations:
+      required: false
