@@ -14,12 +14,12 @@ terraform {
 # Authentication values should be provided via environment variables:
 #   CXONE_ACCESS_KEY_ID     - NiCE CXone Access Key ID
 #   CXONE_ACCESS_KEY_SECRET - NiCE CXone Access Key Secret
-#   CXONE_REGION            - NiCE CXone region (e.g. us-east-1)
+#   CXONE_REGION            - NiCE CXone region code (e.g. na1, eu1, au1)
 #   COGNIGY_API_KEY         - Cognigy.AI API key
 #   COGNIGY_URL             - Cognigy.AI base URL
 
 provider "cxone" {
-  region      = "us-east-1"
+  region      = "na1"
   cognigy_url = "https://api.cognigy.ai"
 
   # access_key_id, access_key_secret, and cognigy_api_key are sensitive

@@ -56,7 +56,7 @@ func (p *CxoneProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp
 				Sensitive:           true,
 			},
 			"region": schema.StringAttribute{
-				MarkdownDescription: "NiCE CXone region for the authentication endpoint (e.g. `us-east-1`). Can also be set via the `CXONE_REGION` environment variable.",
+				MarkdownDescription: "NiCE CXone region code for the authentication endpoint. Valid values include `na1` (North America), `eu1` (Europe), `au1` (Australia). Can also be set via the `CXONE_REGION` environment variable.",
 				Optional:            true,
 			},
 			"cognigy_api_key": schema.StringAttribute{
