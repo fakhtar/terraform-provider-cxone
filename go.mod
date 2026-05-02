@@ -1,6 +1,6 @@
 module github.com/fakhtar/terraform-provider-cxone
 
-go 1.23.2
+go 1.26.2
 
 require github.com/hashicorp/terraform-plugin-framework v1.15.1
 
