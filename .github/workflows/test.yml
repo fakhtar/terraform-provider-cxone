@@ -1,0 +1,71 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+      - name: Build provider
+        run: go build ./...
+
+  unit-test:
+    name: Unit Tests
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+      - name: Run unit tests
+        run: go test -v -cover -timeout=120s -parallel=10 ./...
+
+  acceptance-test:
+    name: Acceptance Tests
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    # Acceptance tests only run when secrets are available.
+    # They will be skipped on PRs from forks.
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.15.1'
+          terraform_wrapper: false
+      - name: Run acceptance tests
+        env:
+          TF_ACC: "1"
+          CXONE_ACCESS_KEY_ID: ${{ secrets.CXONE_ACCESS_KEY_ID }}
+          CXONE_ACCESS_KEY_SECRET: ${{ secrets.CXONE_ACCESS_KEY_SECRET }}
+          CXONE_REGION: ${{ secrets.CXONE_REGION }}
+          COGNIGY_API_KEY: ${{ secrets.COGNIGY_API_KEY }}
+          COGNIGY_URL: ${{ secrets.COGNIGY_URL }}
+        run: go test -v -cover -timeout=120m -parallel=10 ./...
